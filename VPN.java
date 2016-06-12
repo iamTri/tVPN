@@ -21,12 +21,13 @@ public class VPN extends JavaPlugin implements Listener
         this.getConsoleCommandSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m-----------------------------------------------------"));
     }
     
-    
+    // My first ever Bukkit plugin.
+    // Yes, it's a damn scanner.
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(final PlayerLoginEvent event) {
         if (!event.getPlayer().hasPermission("antiproxy.bypass")) {
             try {
-                final String url = "http://iphub.info/api.php?ip=&showtype=3" + event.getAddress().getHostAddress() + "&showtype=3";
+                final String url = "http://iphub.info/api.php?ip=" + event.getAddress().getHostAddress() + "&showtype=3";
                 final Scanner scanner = new Scanner(new URL(url).openStream());
                 if (scanner.findInLine("Proxy: 1") != null) {
                     event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "§cWe do not allow §dVPN usage §con the hCartels Network.\n§7If this is an error, please join §fts.cartels.pw§7.");
